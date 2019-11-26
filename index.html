@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+<h1>Oraakkeli!</h1>
+<p>Olen ihka oikea oraakkeli! Osaan vastata kaikkiin kysymyksiin, kysy pois, jos et muuten usko!</p>
+<input type="text" id="question" value="" style="width:300px;"/>
+<p><button id="askquestion">Kysy!</button></p>
+
+
+<p>Kysymys: <strong id="questionasked"></strong></p>
+<p>Vastaus: <strong id="questionaswered"></strong></p>
+
+<script>
+
+question.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") {ask();
+    }
+});
+
+askquestion.addEventListener('click', ask);
+
+var why = ["Siksi.", "Se nyt vaan on niin."];
+
+var yesno = ["Voin aika suurella varmuudella sanoa, että kyllä."
+            , "Voin aika suurella varmuudella sanoa, että ei."
+            , "Olen melko varma, että kyllä."
+            , "Kyllä."
+            , "Ei."
+            , "No, se nyt on vähän mistä näkökulmasta asiaa katsoo."
+            , "Voi olla, mutta voi olla olemattakin."
+            , "Mistä minä tiedän?", "Mitä sä nyt tuollasia kyselet!?"
+            , "Tähän kysymykseen ei ole olemassa vastausta."
+            , "Se riippuu olosuhteista. Mutta tässä tapauksessa sanoisin, että ei."
+            , "Se riippuu olosuhteista. Mutta tässä tapauksessa sanoisin, että kyllä."
+            , "Ehkä...?"
+            , "Tiedät varmaan itsekkin, että kyllä näin on."
+            , "Tiedät varmaan itsekkin, että asia ei ole noin."
+            , "Olen juuri nyt kiireinen. Kysy myöhemmin uudestaan."
+            , "En halua sanoa."
+            , "Tiedätkö, minulta on todella monta kertaa kysytty tuota ja... No, ootko kuullut koskaan sanottavan, että 'ei ole tyhmiä kysymyksiä, on vain tyhmiä ihmisiä'...?"
+            , "En tiedä."
+            , "Sanotaan vaikka kyllä."
+            , "Sanotaan vaikka ei."
+            , "Ei missään tapauksessa!"
+            , "Ehdottomasti kyllä!"
+            , "Hmm... Joskus tahtoisin sanoa, että kyllä, mutta joskus taas haluan sanoa ei. Päätä itse."
+            , "Neuvonantajani suosittelee, että en vastaa tähän kysymyksen."
+            , "Voi kun tuon tietäisin, niin olisin onnellinen."
+            , "Sori, en kuunnellut. Mitä kysyitkään?"
+            , "Onko sulla joku kyselyikä tai jotain?!"
+            , "Kysymyksiä, kysymyksiä, kysymyksiä! En minäkään voi kaikkee tietää, en ole mikään kone! Vai olenko...?"
+            , "Sori, en halua vastata. Mulla on huono päivä."
+            , "Ai, onko minun mielipiteellä nyt yllättäen jotain väliä! No, vaikka kyllä."
+            , "Ai, onko minun mielipiteellä nyt yllättäen jotain väliä! No, vaikka ei."
+            , "Se on salaisuus."
+            , "Kaikki merkit puhuvat sen puolesta."
+            , "No, jos asiaa oikein kunnolla harkitsen, niin joo, kyllä."
+            , "No, jos asiaa oikein kunnolla harkitsen, niin ei."
+            , "Sori, en ymmärrä kysymystä?!"
+            , "Onks sulla joku eksistentialistinen kriisi kun kyselet kaikkea?"
+            , "En usko että halua tietää vastausta."
+            , "Juorupuheiden perusteella voisi uskoa, että asia on noin, mutta jos asiaa tarkastellaan pelkästään tiedossa olevien faktojen pohjalta, niin asia ei ole aivan niin yksiselitteinen."
+            , "Vaikka kaikki muut sanovat, että asia on noin, en itse suostu uskomaan että näin olisi."
+            , "Tietolähteeni ovat kovin vaitonaisia asiasta, tästä voi ehkä päätellä jotain, mutta en voi antaa ehdottoman varmaan vastausta."];
+
+var dunno = ["En tiedä.", "En osaa sanoa.", "Kysyt ihan liian vaikeita!"
+            , "Tähän ei taida olla olemassa mitään vastausta..."
+            , "Nyt kyllä täytyy myöntää, että en tosiaankaan tiedä!"
+            , "Sori, en ymmärrä kysymystä!"
+            , "En usko että halua tietää vastausta."
+            , "Se on salaisuus."
+            , "Tiedätkö, minulta on todella monta kertaa kysytty tuota ja... No, ootko kuullut koskaan sanottavan, että 'ei ole tyhmiä kysymyksiä, on vain tyhmiä ihmisiä'...?"
+            , "Mistä minä tiedän?", "Mitä sä nyt tuollasia kyselet!?"];
+            
+var yesnoquestions = ["onko", "ovatko", "oliko"]
+var whyquestions = ["miksi"]
+
+
+function ask() {
+    var quest = document.getElementById("question").value;
+    var questsplit = quest.split(" ");
+    var questiotype = questsplit[0].toLowerCase();
+    
+    if (yesnoquestions.includes(questiotype)) {
+        var index = Math.floor(Math.random() * yesno.length);
+        document.getElementById("questionaswered").innerHTML = yesno[index];
+        } else if (questiotype === "miksi") {
+            var index = Math.floor(Math.random() * why.length);
+            document.getElementById("questionaswered").innerHTML = why[index];
+            } else {
+                var index = Math.floor(Math.random() * dunno.length);
+                document.getElementById("questionaswered").innerHTML = dunno[index];
+                }
+    
+
+    document.getElementById("questionasked").innerHTML = document.getElementById("question").value;
+    document.getElementById("question").value = "";
+    }
+
+</script>
+
+</body>
+</html>
